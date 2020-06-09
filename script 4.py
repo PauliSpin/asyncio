@@ -13,7 +13,11 @@ async def keep_printing(name):
     while True:
         print(name, end=" ")
         print_now()
-        await asyncio.sleep(0.50)
+        try:
+            await asyncio.sleep(0.50)
+        except asyncio.CancelledError:
+            print(name, " was cancelled")
+            break
 
 
 # async def async_main():

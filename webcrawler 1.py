@@ -67,10 +67,31 @@ async def crawl1(
         await client.aclose()
     for line in res.text.splitlines():
         if line.startswith(prefix):
+            # Line starts with hyperlink https:
             todo.add(line)
             await crawl1(prefix, line)
         todo.discard(url)
 
-asyncio.run(progress(addr, crawl1))
-
+# asyncio.run(progress(addr, crawl1))
 # This is still slow though : Took 59 seconds!
+
+
+async def crawl2(
+    prefix: str, url: str = ''
+):
+    url = url or prefix
+    client = httpx.AsyncClient()
+    try:
+        res = await client.get(url)
+    finally:
+        await client.aclose()
+    for line in res.text.splitlines():
+        if line.startswith(prefix):
+            todo.add(line)
+            asyncio.create_task(
+                crawl2(prefix, line),
+                name=line,
+            )
+    todo.discard(url)
+
+asyncio.run(progress(addr, crawl2))  # Only took 24 secs instead of 59 secs

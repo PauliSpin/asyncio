@@ -22,6 +22,8 @@ async def async_main():
     waiter = asyncio.wait_for(kp, 3)
     try:
         await waiter    # This is where we are actually awaiting the object 'kp'
+        # Missing 'await' will try to call waiter as a 'normal'
+        # function and will return an error
     except asyncio.TimeoutError:
         print("Timed Out!")
 

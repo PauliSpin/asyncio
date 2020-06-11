@@ -1,7 +1,5 @@
 import asyncio
 import random
-from colorama import Fore
-from colorama import Style
 from colorama import init, Fore, Style
 from termcolor import colored
 

@@ -5,15 +5,12 @@ from termcolor import colored
 
 init()
 
-c = (
-    'cyan',
-    'red',
-    'magenta'
-)
+c = ('cyan', 'red', 'magenta')
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # RUN THIS IN A TERMINAL WINDOW NOT THE OUTPUT WINDOW #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 
 async def makerandom(idx: int, threshold: int = 6) -> int:
     print(colored(f"Initiated makerandom({idx}).", c[idx]))
